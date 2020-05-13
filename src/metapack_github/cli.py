@@ -39,7 +39,7 @@ def github(subparsers):
                                    formatter_class=argparse.RawDescriptionHelpFormatter,
                                    )
 
-    parser.set_defaults(run_command=run_metapackdb)
+    parser.set_defaults(run_command=run_github)
 
     #parser.add_argument('-j', '--json', default=False, action='store_true',
     #                    help='Display configuration and diagnostic information ad JSON')
@@ -62,6 +62,13 @@ def github(subparsers):
     #info.add_argument('url', help="Database or Datapackage URL")
 
     parser.add_argument('metatabfile', nargs='?', help="Path to a notebook file or a Metapack package")
+
+
+def run_github(args):
+    m = MetapackCliMemo(args, downloader)
+
+    args.sub_command(m)
+
 
 
 def get_config():
@@ -109,11 +116,6 @@ def get_or_init_local_repo(m):
 
     return r
 
-
-def run_metapackdb(args):
-    m = MetapackCliMemo(args, downloader)
-
-    args.sub_command(m)
 
 
 def run_init_cmd(m):
