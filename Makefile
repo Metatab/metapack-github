@@ -14,9 +14,18 @@ showrev:
 	@echo this=$(THIS_REV) next=$(NEXT_REV)
 
 publish:
-	git push --tags origin
-	python setup.py sdist
+	$(MAKE) clean
+	python setup.py sdist && \
+	twine check dist/* && \
+	git push --tags origin && \
 	twine upload dist/*
+	$(MAKE) clean
+
+clean:
+	@rm -Rf *.egg .cache .coverage .tox build dist docs/build htmlcov
+	@find . -depth -type d -name __pycache__ -exec rm -Rf {} \;
+	@find . -type f -name '*.pyc' -delete
+
 
 develop:
 	python setup.py develop

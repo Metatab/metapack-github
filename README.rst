@@ -1,8 +1,8 @@
-====================
-Metapack Linked Data
-====================
+===========================
+Metapack Support for Github
+===========================
 
-Linked data support for Metapack data packages
+Initialize a git repository for a Metapack package and commit it to Github.
 
 
 Installation
@@ -18,7 +18,7 @@ Use
 
 
 Development
-==========
+===========
 
 
 Committing
@@ -47,7 +47,6 @@ This project has been set up using PyScaffold 3.1. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
 
 
-.. _CityIQ: https://developer.currentbyge.com/cityiq
 .. _PEP440: http://www.python.org/dev/peps/pep-0440/
 .. _PyPI: https://pypi.org/
 .. _Scraping: https://sandiegodata.github.io/cityiq/html/index.html#module-cityiq.cli.events
