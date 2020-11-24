@@ -10,7 +10,7 @@ from os.path import exists
 import argparse
 from metapack.cli.core import prt, err, warn
 from metapack.cli.core import  get_config as _get_config
-from metapack.cli.core import MetapackCliMemo as _MetapackCliMemo
+from metapack.cli.core import MetapackCliMemo as _MetapackCliMemo, add_giturl, write_doc
 from metapack import Downloader
 from github import Github
 
@@ -127,12 +127,17 @@ def run_init_cmd(m):
     remote_r = get_or_new_github_repo(g, m)
     local_r = get_or_init_local_repo(m)
 
+
     try:
         origin = local_r.remote('origin')
-    except (ValueError, GitCommandError):
+    except (ValueError, GitCommandError) as e:
+        print(e)
         origin = local_r.create_remote('origin', remote_r.clone_url)
         #local_r.create_head('master', origin.refs.master)
         local_r.git.push('--set-upstream','origin','master')
+
+    add_giturl(m.doc, force=True)
+    write_doc(m.doc)
 
     prt(f'Initialized local and remote {origin.refs.master} at {remote_r.clone_url}')
 
