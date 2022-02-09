@@ -144,4 +144,3 @@ def run_init_cmd(m):
 
 def run_remote_cmd(m):
     pass
-
