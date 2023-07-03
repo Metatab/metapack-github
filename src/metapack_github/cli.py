@@ -42,7 +42,7 @@ def github(subparsers):
     parser.set_defaults(run_command=run_github)
 
     #parser.add_argument('-j', '--json', default=False, action='store_true',
-    #                    help='Display configuration and diagnostic information ad JSON')
+    #                    help='Display configuration and diagnostic information as JSON')
 
     subparsers = parser.add_subparsers()
 
@@ -91,6 +91,9 @@ def get_or_new_github_repo(g, m):
     from github import UnknownObjectException
 
     org_name = get_config().get('github').get('organization')
+
+    if not org_name:
+        err('Metatab missing github.organization config in ~/.metapack.yaml. Set to Github organizaton name where you will store packages')
 
     org = g.get_organization(org_name)
 
